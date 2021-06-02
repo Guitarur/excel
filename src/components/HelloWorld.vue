@@ -81,7 +81,7 @@ export default {
 
     init (data){
       let newArr = []
-      console.log(data[0]['观测时间'].getHours())
+      console.log(data[0]['观测时间'].getMonth())
       newArr = data.filter((ele,index) => {
         // data[index]['观测时间'].getDate()
         return (new Date(ele['观测时间']).getDate()) == 26 && (new Date(ele['观测时间']).getHours() == 4)
@@ -94,7 +94,7 @@ export default {
       this.newArr = newArr
     },
     initDate (time){
-      return time.getFullYear() + '-' + time.getMonth() + '-' + time.getDate()
+      return time.getFullYear() + '-' + (time.getMonth()+1) + '-' + time.getDate()
     }
   }
 }
