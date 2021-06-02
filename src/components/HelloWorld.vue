@@ -78,10 +78,20 @@ export default {
       };
       reader.readAsBinaryString(file);
     },
-
+    compare(obj1,obj2){
+      var val1 = new Date(obj1['观测时间']).getTime();
+      var val2 = new Date(obj2['观测时间']).getTime();
+      if (val1 < val2) {
+          return -1;
+      } else if (val1 > val2) {
+          return 1;
+      } else {
+          return 0;
+      }       
+    },
     init (data){
       let newArr = []
-      console.log(data[0]['观测时间'].getMonth())
+      console.log(data[0]['观测时间'].getDate())
       newArr = data.filter((ele,index) => {
         // data[index]['观测时间'].getDate()
         return (new Date(ele['观测时间']).getDate()) == 26 && (new Date(ele['观测时间']).getHours() == 4)
@@ -90,6 +100,7 @@ export default {
       newArr.forEach((ele,index) => {
         newArr[index]['观测时间'] = this.initDate(ele['观测时间'])
       })
+      newArr.sort(this.compare)
       console.log(newArr)
       this.newArr = newArr
     },
